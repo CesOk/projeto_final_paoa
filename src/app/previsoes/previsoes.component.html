@@ -39,7 +39,7 @@
           <ng-template pTemplate="header">
             <tr *ngFor="let h of historico">
               <td align="center">{{h.cidade}}</td>
-              <td align="center"><img src="http://openweathermap.org/img/wn/02d.png"></td>
+              <td align="center"><img src={{h.link_previsao}}></td>
             </tr>
           </ng-template>
         </p-table>
