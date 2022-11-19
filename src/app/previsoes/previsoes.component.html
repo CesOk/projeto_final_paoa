@@ -6,15 +6,25 @@
           <input type="text" pInputText
           placeholder="Digite a cidade"
           [(ngModel)]="cidade" />
-          <div *ngFor="let p of previsoes">
-            <table>
-              <tr>{{p.dt_txt}}</tr>
-              <br>
-              <tr>Temp. Max.       Temp. Min.</tr>
-              <tr>{{p.main.temp_min}} °C    {{p.main.temp_max}} °C</tr>
-              <br>
-            </table>
-          </div>
+          <br><br>
+          <h1>Previsões para {{cidade}}</h1>
+          <br>
+          <p-table>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Data / Hora</th>
+                <th>T°C Mín.</th>
+                <th>T°C Máx.</th>
+                <th>Clima</th>
+              </tr>
+              <tr *ngFor="let p of previsoes">
+                <td align="center">{{p.dt_txt}}</td>
+                <td align="center">{{p.main.temp_min}}</td>
+                <td align="center">{{p.main.temp_max}}</td>
+                <td align="center"><img src="http://openweathermap.org/img/wn/02d.png"></td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
         <br>
         <div>
@@ -25,18 +35,26 @@
         </div>
       </p-tabPanel>
       <p-tabPanel header="HISTÓRICO">
+        <p-table>
+          <ng-template pTemplate="header">
+            <tr *ngFor="let h of historico">
+              <td align="center">{{h.cidade}}</td>
+              <td align="center"><img src="http://openweathermap.org/img/wn/02d.png"></td>
+            </tr>
+          </ng-template>
+        </p-table>
         <button pButton type="button"
         label="Atualizar"
-        (click)="pesquisar()">
+        (click)="consultarHistorico()">
         </button>
       </p-tabPanel>
     </p-tabView>
   </div>
 </div>
 
-<!-- <div *ngFor="let p of previsoes">
-  {{p.dt_txt}}
+<div *ngFor="let p of previsoes">
   <br>
-  {{p.main.temp_min}}{{p.main.temp_max}}
-  <br>
-</div> -->
+  {{p.weather.id}}
+</div>
+
+

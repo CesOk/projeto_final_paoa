@@ -9,11 +9,19 @@ import { PrevisoesService } from '../previsoes.service';
 export class PrevisoesComponent implements OnInit{
   cidade: string;
   previsoes: any;
+  historico: any;
+  url_icon: string;
+  esconderChamada = true;
 
   ngOnInit(): void{
     this.previsoesService
     .registrarComponenteComoInteressado().subscribe((previsoes: any) => {
     this.previsoes = previsoes.list
+    })
+
+    this.previsoesService
+    .registrarComponenteComoInteressado().subscribe((historico: any) => {
+    this.historico = historico.items
     })
   }
 
@@ -21,13 +29,15 @@ export class PrevisoesComponent implements OnInit{
 
   }
 
-  pesquisar(): void{
+  pesquisar() : void {
     this.previsoesService.obterPrevisoes(this.cidade)
-
   }
 
   armazenarNoHistorico(){
     this.previsoesService.armazenarNoHistorico(this.cidade, null, "link de teste")
   }
-
+  
+  consultarHistorico() : void{
+    this.previsoesService.consultarHistorico()
+  }
 }
